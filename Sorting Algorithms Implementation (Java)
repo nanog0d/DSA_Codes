@@ -1,0 +1,60 @@
+import java.util.List;
+import java.util.ArrayList;
+public class Main
+{
+    void swap(int minValInd, int i, ArrayList<Integer> A){
+        int temp;
+        temp = A.get(i);
+        A.set(i, A.get(minValInd));
+        A.set(minValInd, temp);
+    }
+    int findMin(ArrayList<Integer> A, int ind){
+        int minValInd = ind;
+        
+        for(int i = ind + 1; i < A.size(); i++){
+            if(A.get(i) < A.get(minValInd)){
+                minValInd = i;
+            }
+        }
+        
+        return minValInd;
+    }
+    void selectionSort(ArrayList<Integer> A){
+        int minValInd;
+        
+        for(int i = 0; i < A.size(); i++){
+            minValInd = findMin(A, i);
+            swap(minValInd, i, A);
+        }
+    }
+    void insertionSort(ArrayList<Integer> A){
+        int key, j;
+        
+        for(int i = 1 ; i < A.size(); i++){
+            key = A.get(i);
+            j = i - 1;
+            while(j >= 0 && A.get(j) > key){
+                A.set(j + 1, A.get(j));
+                j--;
+            }
+            A.set(j + 1, key);
+        }
+    }
+	public static void main(String[] args) {
+		ArrayList<Integer> A = new ArrayList<Integer>();
+		Main m = new Main();
+		
+		A.add(6);
+		A.add(1);
+		A.add(5);
+		A.add(3);
+		A.add(8);
+		A.add(6);
+		A.add(4);
+		m.insertionSort(A);
+		
+		for(int num : A){
+		    System.out.printf("%d ", num);
+		}
+	}
+}

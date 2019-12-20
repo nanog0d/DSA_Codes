@@ -1,0 +1,47 @@
+Selection Sort:
+	Time Complexity		= O(n^2)
+	Space Complexity  = O(1)
+
+Insertion Sort:
+	Time Complexity		= O(n^2)
+	Space Complexity	= O(1)
+
+Bubble Sort:
+	Time Complexity		= O(n^2)
+	Space Complexity 	= O(1)
+
+Merge Sort:
+	Time Complexity		= O(n*logn)
+	Space Complexity 	= O(n*logn)
+	
+	Time Complexity:
+		- Length of array A is n.
+		- Assignment of left and right subarray takes n units of time.
+		- Calling mergeSort recursion function takes T(n/2) units of time.
+		- Calling merge function takes n units of time.
+		- When n = 1, the base condition is true for which we return the function, and it takes T(1) (Constant) units of time.
+		- T(n) = T(1) (Constant), for n < 2
+		- T(n) = 2*T(n/2) + n, otherwise
+		- T(n/2) = 2*T(n/4) + n/2 (We can write this for any n)
+		- This will make T(n) (in general terms for some k):
+					T(n) = (2^k)*T(n/(2^k)) + k*n
+		- For our base condition, T(n) = constant. This implies that:
+				=>	n/(2^k) = 1
+				=>	n = 2^k
+				=>	k = logn (with base 2)
+		- Substituting k in T(n) to get T(n) in terms of constant and n:
+				T(n) = n*logn + n
+				which is equivalent to O(n*logn).
+	Space Complexity:
+		- We are dividing any array into left and right subarray and at each recursive call, we are alloting extra memory to 
+			these left and right subarrays.
+		- For any level of recursive call, the alloted memory to left and right subarray will be n/(2^k) units of memory.
+		- At the last level of recursive call, the alloted memory will be 1 unit of memory to both.
+				=> n/(2^k) = 1
+				=> k = logn (with base 2) 
+		- This means that we will be having logn levels for any n.
+		- So, sum of all the allotted memory to these left and right subarray will be:
+				=> n + n/2 + n/3 + ......... + 1
+				=> n(1 + 1/2 + 1/3 + 1/4 + ....... 1/n)
+				=> n*logn
+		- Thus the space complexity will be O(n*logn).

@@ -112,6 +112,30 @@ public class Main
         mergeSort(right); // this call will make the right subarray as the parent array.
         merge(left, right, A);
     }
+    Integer partition(int startInd, int endInd, ArrayList<Integer> A){
+        //if(A.size() == 1) return A.get(startInd);
+        int pivot = A.get(endInd);
+        int partInd = startInd;
+        
+        for(int i = startInd ; i < endInd ; i++){
+            if(A.get(i) <= pivot){
+                swap(partInd, i, A);
+                partInd++;
+            }
+        }
+        swap(endInd, partInd, A);
+        
+        return partInd;
+    }
+    void quickSort(int startInd, int endInd, ArrayList<Integer> A){
+        //if(A.size() <= 1) return; This wont work as the following will be a corner case.
+        if(startInd >= endInd) return;
+        int partInd;
+        
+        partInd = partition(startInd, endInd, A);
+        quickSort(startInd, partInd - 1, A); // quickSort on left partition.
+        quickSort(partInd + 1, endInd, A); // quickSort on right partition.
+    }
 	public static void main(String[] args) {
 		ArrayList<Integer> A = new ArrayList<Integer>();
 		Main m = new Main();
@@ -123,8 +147,8 @@ public class Main
 		A.add(8);
 		A.add(2);
 		A.add(4);
-		m.mergeSort(A);
-		
+		//m.mergeSort(A);
+		m.quickSort(0,6, A);
 		for(int num : A){
 		    System.out.printf("%d ", num);
 		}

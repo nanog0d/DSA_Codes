@@ -5,7 +5,7 @@ public class Main
     ArrayList<Integer> maxSubArray(ArrayList<Integer> A){
         int countNeg = 0, max = A.get(0);
         int max_So_Far = 0, max_Ending_Here = 0;
-        int s = 0, j = 0,e = 0;
+        int s = 0, j = 0,end = 0, start = 0;
         ArrayList<Integer> B = new ArrayList<Integer>();
         
         for(int i = 0; i < A.size(); i++){
@@ -16,8 +16,8 @@ public class Main
             for(int i = 0; i < A.size(); i++){
                 if(A.get(i) > max){
                     max = A.get(i);
-                    s = i;
-                    e = i;
+                    start = i;
+                    end = i;
                 } 
             }
             B.add(s);
@@ -29,15 +29,16 @@ public class Main
                 max_Ending_Here = max_Ending_Here + A.get(j);
                 if(max_Ending_Here > max_So_Far){
                     max_So_Far = max_Ending_Here;
-                    e = j;
+                    end = j;
+		    start = s;
                 }
                 if(max_Ending_Here < 0){
                     max_Ending_Here = 0;
                     s = j + 1;
                 }
             }
-            B.add(s);
-            B.add(e);
+            B.add(start);
+            B.add(end);
         }
         System.out.print("Start Index = " + B.get(0) + " : " + "End Index = " + B.get(1));
         System.out.print("\n");
